@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sports Data Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('serve_style', filename='style/format.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="{{ url_for('literature') }}" class="{% if request.path == '/literature' %}active{% endif %}">Literature Review</a>
+    <a href="{{ url_for('database') }}" class="{% if request.path == '/database' %}active{% endif %}">Dataset Analysis</a>
+    <a href="{{ url_for('report') }}" class="{% if request.path == '/report' %}active{% endif %}">Report</a>
+  </nav>
+
+  <div class="content">
+    {{ content | safe }}
+  </div>
+</body>
+</html>

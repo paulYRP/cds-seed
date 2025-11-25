@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Sports Data Dashboard</title>
-  <link rel="stylesheet" href="{{ url_for('serve_style', filename='style/format.css') }}">
+  <link rel="stylesheet" href="{{ url_for('serve_style', filename='format.css') }}">
 </head>
 <body>
   <nav class="navbar">
+    <img src="../style/qut.png" class="nav-logo">
+    <div class="nav-spacer"></div>
     <a href="{{ url_for('literature') }}" class="{% if request.path == '/literature' %}active{% endif %}">Literature Review</a>
     <a href="{{ url_for('database') }}" class="{% if request.path == '/database' %}active{% endif %}">Dataset Analysis</a>
     <a href="{{ url_for('report') }}" class="{% if request.path == '/report' %}active{% endif %}">Report</a>

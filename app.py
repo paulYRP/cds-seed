@@ -5,12 +5,12 @@ app.secret_key = "QUTKey"
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    return redirect(url_for("literature"))
+    return redirect(url_for("methods"))
 
 # ---- REPORT ROUTES ----
-@app.route("/literature")
-def literature():
-    with open("docs/literature.html", "r", encoding="utf-8") as f:
+@app.route("/methods")
+def methods():
+    with open("docs/methods.html", "r", encoding="utf-8") as f:
         report_content = f.read()
     return render_template("index.html", content=report_content)
 

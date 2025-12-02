@@ -9,9 +9,10 @@
   <nav class="navbar">
     <img src="../style/qut.png" class="nav-logo">
     <div class="nav-spacer"></div>
-    <a href="{{ url_for('methods') }}" class="{% if request.path == '/methods' %}active{% endif %}">Synthetic Methods</a>
-    <a href="{{ url_for('database') }}" class="{% if request.path == '/database' %}active{% endif %}">Sport Datasets</a>
-    <a href="{{ url_for('report') }}" class="{% if request.path == '/report' %}active{% endif %}">Report</a>
+    <a href="{{ url_for('synthetic') }}" class="{% if request.path == '/synthetic' %}active{% endif %}">Synthetic</a>
+    <a href="{{ url_for('real') }}" class="{% if request.path == '/real' %}active{% endif %}">Real</a>
+    <a href="{{ url_for('summary') }}" class="{% if request.path == '/summary' %}active{% endif %}">Summary</a>
+    <a href="{{ url_for('reference') }}" class="{% if request.path == '/reference' %}active{% endif %}">Reference</a>
   </nav>
 
   <div class="content">

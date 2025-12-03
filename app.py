@@ -27,6 +27,12 @@ def summary():
         report_content = f.read()
     return render_template("index.html", content=report_content)
 
+@app.route("/report")
+def report():
+    with open("docs/report.html", "r", encoding="utf-8") as f:
+        report_content = f.read()
+    return render_template("index.html", content=report_content)
+
 @app.route("/reference")
 def reference():
     with open("docs/data.html", "r", encoding="utf-8") as f:

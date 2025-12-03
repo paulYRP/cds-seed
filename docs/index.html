@@ -12,7 +12,8 @@
     <a href="{{ url_for('synthetic') }}" class="{% if request.path == '/synthetic' %}active{% endif %}">Synthetic</a>
     <a href="{{ url_for('real') }}" class="{% if request.path == '/real' %}active{% endif %}">Real</a>
     <a href="{{ url_for('summary') }}" class="{% if request.path == '/summary' %}active{% endif %}">Summary</a>
-    <a href="{{ url_for('reference') }}" class="{% if request.path == '/reference' %}active{% endif %}">Reference</a>
+    <a href="{{ url_for('report') }}" class="{% if request.path == '/report' %}active{% endif %}">Report</a>
+    <a href="{{ url_for('reference') }}" class="{% if request.path == '/reference' %}active{% endif %}">Data</a>
   </nav>
 
   <div class="content">

@@ -1901,7 +1901,7 @@ across sport-specific case-study datasets?</strong></a></li>
 </div>
 
 <p>This report provides an overview of how the proposed research
-questions were developed using the <a href="https://research.ebsco.com/c/2urfuu/viewer/pdf/oejfkif6pv">SPIDER</a>
+questions are developed using the <a href="https://research.ebsco.com/c/2urfuu/viewer/pdf/oejfkif6pv">SPIDER</a>
 framework, based on the patterns and insights identified in the
 analysis.</p>
 <ul>
@@ -1914,19 +1914,24 @@ needs influence predictive performance.</li>
 <li>The fourth addresses the need to manage and reproduce controlled
 imbalance commonly observed in real-world sports datasets.</li>
 </ul>
-<p>Each question was aligned with specific issues reported in the
-literature, and each issue was linked to practical challenges that
-appear when synthetic data is used in sport settings for performance and
-injury prediction.</p>
+<p>Each question is aligned with specific issues reported in the
+literature, and each issue is linked to practical challenges that appear
+when synthetic data is used in sport settings for performance and injury
+prediction.</p>
 <div id="what-is-the-relationship-between-domain-shift-severity-and-the-predictive-accuracy-of-performance-and-injury-models-across-different-real-sport-datasets" class="section level2">
 <h2><strong>What is the relationship between domain-shift severity and
 the predictive accuracy of performance and injury models across
 different real-sport datasets?</strong></h2>
+<p>The recognition that real-sport datasets are varied across sports,
+competitions, and measurement systems. When models trained on one
+dataset are applied to another, the underlying distribution often
+changes. This challenge is directly noted in:</p>
 <p>“As a result, models trained exclusively on synthetic data may
 exhibit limited generalizability when deployed in unconstrained or
 heterogeneous settings, unless domain adaptation techniques such as
 adversarial alignment or feature disentanglement are employed.” <a href="https://www.sciencedirect.com/science/article/pii/S026288562500277X">(Caruso
 et al., 2023)</a></p>
+<p>This point is reinforced by the observation that:</p>
 <p>“The domain shift is a common problem to all synthetic datasets and
 is being addressed by extensive research in the field of domain
 adaptation [23]; however, current research is mostly focused on images
@@ -1976,11 +1981,18 @@ characteristics, it’s possible with more varied data that certain kinds
 of impacts might not be well modeled with insufficient balance of real
 and synthetic data.” <a href="https://link.springer.com/article/10.1007/s10439-022-02911-6">(Raymond
 et al.,2022)</a></p>
+<p>These statements support the inclusion of the first question, which
+investigates how domain-shift severity relates to predictive accuracy
+across real-sport case studies.</p>
 </div>
 <div id="how-do-differences-in-fidelity-and-utility-between-synthetic-and-real-data-affect-model-accuracy-when-predicting-athlete-performance-and-injury-outcomes" class="section level2">
 <h2><strong>How do differences in fidelity and utility between synthetic
 and real data affect model accuracy when predicting athlete performance
 and injury outcomes?</strong></h2>
+<p>Attention then moved to the link between synthetic and real data.
+Several studies described the need to evaluate how closely synthetic
+data matches real data and how well it supports modelling. The statement
+that:</p>
 <p>“To evaluate the quality of the generated data we focused on
 assessing both, the fidelity of synthetic data by comparing diverse
 measures of similarity of data distributions, and the utility of these
@@ -1988,18 +2000,26 @@ data by measuring the generalization capabilities of models trained on
 them. … Data fidelity refers to the degree of similarity between
 synthetic and real data. … Besides data fidelity, another important
 aspect to consider when generating synthetic data is data utility.” <a href="https://link.springer.com/chapter/10.1007/978-3-031-72353-7_12">(Hohl,
-et al., 2024)</a></p>
+et al., 2024)</a>, highlighted this issue.</p>
+<p>Concerns about the risks of alternative modelling frameworks without
+validation are also raised:</p>
 <p>“Future research should explore the potential of other such model
 frameworks across different data contexts, but it should be stated that
 use of these alternative models without prior validation poses obvious
 risks.” <a href="https://link.springer.com/article/10.1007/s40279-025-02221-6">(Warmenhoven
 et al. 2025)</a></p>
+<p>These points informed the second question, which examines the
+relationship between fidelity, utility, and predictive accuracy.</p>
 </div>
 <div id="do-specific-constrained-synthetic-data-generation-methods-improve-prediction-accuracy-for-performance-and-injury-events-compared-with-unconstrained-methods-across-different-sports-datasets" class="section level2">
 <h2><strong>Do specific constrained synthetic data generation methods
 improve prediction accuracy for performance and injury events compared
 with unconstrained methods across different sports
 datasets?</strong></h2>
+<p>A third issue emerged from understanding the conditions under which
+synthetic data is produced. Several papers described situations where
+unconstrained synthetic data may fail to represent sport-specific
+structure. For example, it is reported that:</p>
 <p>“Our validation focused on statistical properties and predictive
 performance, rather than incorporating biological plausibility into the
 SDG process. This limitation emphasizes the importance of data-centric
@@ -2024,6 +2044,8 @@ of the most intensive training sessions, 4. generation of uncommon
 training sessions based on synthetic data, 5. data enrichment of the
 existing archive with the uncommon training sessions.” <a href="https://link.springer.com/chapter/10.1007/978-3-030-93247-3_7">(Fister
 et al., 2022)</a></p>
+<p>A related challenge appeared in sport training research, where it is
+described that models struggle to handle multiple scenarios:</p>
 <p>“Of course, our comparisons are highly unfair and skewed toward our
 exact scenario. That is the point we are trying to make in this
 investigation. … Since there is no ground truth and it is unlikely that
@@ -2031,23 +2053,33 @@ there could ever be an actually recorded ground truth of the magnitude
 and variation of our data, we demonstrate qualitatively, what the
 developed improvements could mean in practice.” <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10209049">(Baumgartner
 et al., 2023)</a></p>
+<p>These statements supported the third question, which compares
+constrained and unconstrained synthetic data generation methods for
+performance and injury prediction.</p>
 </div>
 <div id="what-effect-does-controlled-class-imbalance-have-on-the-performance-of-models-trained-with-synthetic-data-when-predicting-performance-and-injury-across-sport-specific-case-study-datasets" class="section level2">
 <h2><strong>What effect does controlled class imbalance have on the
 performance of models trained with synthetic data when predicting
 performance and injury across sport-specific case-study
 datasets?</strong></h2>
+<p>The final question is motivated by imbalances that appear across many
+sport datasets. This issue is highlighted in a team sport data:</p>
+<p>“Finally, it should be noted that due to the nature of indoor sports
+games (handball and basketball), there is a clear class imbalance.
+Certain game situations such as regular plays and attacks are much more
+common than specific events like free throws or penalties.” <a href="https://www.sciencedirect.com/science/article/pii/S2352340924012277">(Cabado
+et al., 2025)</a></p>
+<p>Concerns about extreme values and limited observations are also
+noted, as stated:</p>
 <p>“The data generated by the model is currently not “pure” enough to be
 considered truly pseudo-real, and hence, cannot be used to generate
 pseudo-real test data for testing and validation but by using state of
 the art random number generator for initial state and if used in apropos
 scenarios will yield promoting results.” <a href="https://ieeexplore.ieee.org/document/9297491">(Shah et al.,
 2020)</a></p>
-<p>“Finally, it should be noted that due to the nature of indoor sports
-games (handball and basketball), there is a clear class imbalance.
-Certain game situations such as regular plays and attacks are much more
-common than specific events like free throws or penalties.” <a href="https://www.sciencedirect.com/science/article/pii/S2352340924012277">(Cabado
-et al., 2025)</a></p>
+<p>These observations guided the fourth question, which examines the
+need of controlled-class imbalance models in synthetic data for
+performance and injury prediction.</p>
 </div>
 <div id="framework" class="section level2">
 <h2><strong>Framework</strong></h2>

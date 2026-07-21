@@ -1,34 +1,34 @@
-# CDS Seed
+# Common Data Science and Synthetic Data in Sports
 
-Identify common data science and AI use cases in sports, and opportunities to
-integrate synthetic data into day-to-day workflows.
+<p align="center">
+  <img src="assets/readme/cds.png" alt="Queensland University of Technology" width="700">
+</p>
 
-The website is a fully static GitHub Pages site. It does not require Flask,
-Gunicorn, Render, or another application server.
+<p align="center">
+  <a href="https://paulyrp.github.io/cds-seed/">
+    <img src="assets/readme/website.gif" alt="Walkthrough of the CDS website" width="900">
+  </a>
+</p>
 
-## GitHub Pages
+This website presents an exploration of common data science applications in sport and the opportunities for integrating synthetic data into research and practice.
 
-Publish the `docs/` folder from the `main` branch. The site will be available at:
+**[Explore the website](https://paulyrp.github.io/cds-seed/)**
 
-https://paulyrp.github.io/cds-seed/
+## Website sections
 
-## Preview locally
+- **[Synthetic](https://paulyrp.github.io/cds-seed/synthetic.html):** evidence and examples related to synthetic sport datasets.
+- **[Real](https://paulyrp.github.io/cds-seed/real.html):** an overview of real-world sport datasets and their characteristics.
+- **[Summary](https://paulyrp.github.io/cds-seed/summary.html):** a consolidated summary of the reviewed evidence.
+- **[Report](https://paulyrp.github.io/cds-seed/report.html):** the complete report and supporting analysis.
+- **[Framework](https://paulyrp.github.io/cds-seed/framework.html):** an interactive framework for examining synthetic data projects.
+- **[Data](https://paulyrp.github.io/cds-seed/data.html):** the records and supporting information used by the website.
 
-```powershell
-python -m http.server 8000 --directory docs
-```
+## Framework
 
-Open http://127.0.0.1:8000/.
+The framework provides a step-by-step structure for considering the objective, structure, strategy, constraints, utility, and risk of a synthetic data project. Its interactive boxes allow users to review supporting evidence and open linked sources.
 
-## Rebuild after changing report content
-
-Source report documents are stored in `content/`. Run:
-
-```powershell
-python scripts/extract_shared_assets.py
-python scripts/build_static_site.py
-```
-
-The first command extracts only large byte-identical CSS and JavaScript blocks
-for cross-page caching. The second builds and validates the static pages in
-`docs/`; report content and page-specific data are preserved.
+<p align="center">
+  <a href="https://paulyrp.github.io/cds-seed/framework.html">
+    <img src="assets/readme/framework.png" alt="Interactive synthetic data framework" width="900">
+  </a>
+</p>

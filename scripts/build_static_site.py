@@ -14,7 +14,7 @@ OUTPUT_DIR = ROOT / "docs"
 TEMPLATE_PATH = ROOT / "templates" / "static_page.html"
 
 PAGES = (
-    ("index.html", "synthetic.html", "synthetic", "Synthetic Sport Datasets"),
+    ("synthetic.html", "synthetic.html", "synthetic", "Synthetic Sport Datasets"),
     ("real.html", "real.html", "real", "Real Sport Datasets"),
     ("summary.html", "summary.html", "summary", "Summary"),
     ("report.html", "report.html", "report", "Report"),
@@ -23,7 +23,7 @@ PAGES = (
 )
 
 NAV_ITEMS = (
-    ("synthetic", "Synthetic", "index.html"),
+    ("synthetic", "Synthetic", "synthetic.html"),
     ("real", "Real", "real.html"),
     ("summary", "Summary", "summary.html"),
     ("report", "Report", "report.html"),

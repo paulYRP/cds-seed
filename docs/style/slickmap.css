@@ -1,0 +1,557 @@
+/* ------------------------------------------------------------
+	Reset Styles
+------------------------------------------------------------ */
+
+#framework-root html,
+#framework-root body,
+#framework-root div,
+#framework-root span,
+#framework-root applet,
+#framework-root object,
+#framework-root iframe,
+#framework-root h1,
+#framework-root h2,
+#framework-root h3,
+#framework-root h4,
+#framework-root h5,
+#framework-root h6,
+#framework-root p,
+#framework-root blockquote,
+#framework-root pre,
+#framework-root a,
+#framework-root abbr,
+#framework-root acronym,
+#framework-root address,
+#framework-root big,
+#framework-root cite,
+#framework-root code,
+#framework-root del,
+#framework-root dfn,
+#framework-root em,
+#framework-root font,
+#framework-root img,
+#framework-root ins,
+#framework-root kbd,
+#framework-root q,
+#framework-root s,
+#framework-root samp,
+#framework-root small,
+#framework-root strike,
+#framework-root strong,
+#framework-root sub,
+#framework-root sup,
+#framework-root tt,
+#framework-root var,
+#framework-root dl,
+#framework-root dt,
+#framework-root dd,
+#framework-root ol,
+#framework-root ul,
+#framework-root li,
+#framework-root fieldset,
+#framework-root form,
+#framework-root label,
+#framework-root legend,
+#framework-root table,
+#framework-root caption,
+#framework-root tbody,
+#framework-root tfoot,
+#framework-root thead,
+#framework-root tr,
+#framework-root th,
+#framework-root td {
+
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 16px;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+
+
+/* ------------------------------------------------------------
+	General Styles
+------------------------------------------------------------ */
+
+#framework-root * {
+	box-sizing: border-box;
+}
+
+/* navHeight */
+:root {
+	--navHeight: 94px;   /* adjust based on actual navbar height */
+}
+
+#framework-root {
+    position: fixed;
+    top: var(--navHeight);
+    left: 0;
+    right: 0;
+    height: calc(100vh - var(--navHeight));
+    overflow: hidden;
+    display: flex;
+}
+
+
+/* Left window */
+#framework-root .sitemap {
+    flex: 3;
+    padding: 2em; 
+	overflow-x: auto;
+	overflow-y: auto;
+
+    scroll-behavior: smooth;
+}
+
+/* Right window – info panel */
+#framework-root #framework-panel {
+    flex: 1.5;
+    overflow-y: auto;
+    background: #f7f7f7;
+    border-left: 1px solid #ddd;
+    padding: 2em;
+
+    /* Theme variables */
+    --panelTitleColor: #2c3e50;
+    --panelTitleBorder: #e1e5ea;
+}
+
+/* Title */
+#framework-root #framework-panel h2 {
+    color: var(--panelTitleColor);
+    border-bottom: 2px solid var(--panelTitleBorder);
+
+    font-size: 1.9em;        /* bigger title */
+    font-weight: 700;        /* bold */
+    letter-spacing: 0.06em;
+
+    margin-bottom: 1.2em;   /* space between title and body */
+    padding-bottom: 0.4em;  /* space above border */
+}
+
+/* Body text */
+#framework-root #framework-panel p {
+    font-size: 1.05em;
+    line-height: 1.7;
+    color: #333;
+    margin-bottom: 1em;
+}
+
+/* ------------------------------------------------------------
+	Page Styles
+------------------------------------------------------------ */
+
+/* -------- Top Level --------- */
+
+#framework-root .primaryNav {
+	clear: both;
+	width: 100%;
+	margin-top: 4em;
+    text-align: center;
+}
+#framework-root .primaryNav #home {
+	position: absolute;
+	margin-top: -3em;
+	margin-bottom: 0;
+	min-width: 11.5em;
+	width: 100%;
+}
+
+#framework-root .primaryNav #home:before {
+	display: none;
+}
+
+#framework-root .primaryNav ul {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+	list-style: none;
+	position: relative;
+}
+#framework-root .primaryNav li {
+	flex: 1;
+	flex-basis: 11.5em;
+	padding-right: 1.25em;
+	position: relative;
+}
+#framework-root .primaryNav > ul > li {
+	margin-top: 3em;
+}
+
+#framework-root .primaryNav li a {
+	text-align: center;
+    align-items: center;
+    justify-content: center; 
+
+	margin: 0;
+	padding: .775em .9275em .9275em .9075em;
+	display: block;
+	font-size: .8995em;
+	font-weight: bold;
+	color: white;
+	background: #0090ff;
+	text-shadow: 0 0 10px rgba(0,0,0,.1);
+	border: 1px solid  rgba(0,0,0,.25);
+	box-shadow: 0px 2px 1px rgba(0,0,0,0.15);
+	text-decoration: none;
+}
+
+#framework-root .primaryNav li a:hover {
+	background-color: #0070f9;
+}
+
+#framework-root .primaryNav [data-panel] {
+	cursor: pointer;
+}
+
+#framework-root .primaryNav [data-panel].is-selected,
+#framework-root .primaryNav [data-panel]:focus-visible {
+	outline: 3px solid #111;
+	outline-offset: 2px;
+}
+#framework-root .primaryNav a:link:after,
+#framework-root .primaryNav a:visited:after {
+	content: none;
+}
+#framework-root .utilityNav a:link:after,
+#framework-root .utilityNav a:visited:after {
+	content: " "attr(href)" ";
+	display: block;
+	font-weight: 600;
+	font-size: .75em;
+	margin-top: .25em;
+	word-wrap: break-word;
+	color: rgba(255,255,255,.75);
+}
+
+/* -------- Second Level --------- */
+
+#framework-root .primaryNav ul ul {
+	display: block;
+}
+#framework-root .primaryNav ul ul li {
+	padding-top: .6875em;
+	padding-right: 0;
+}
+#framework-root .primaryNav ul ul li a {
+	background-color: #28bf5e;
+}
+#framework-root .primaryNav ul ul li a:hover {
+	background-color: #09a63e;
+}
+#framework-root .primaryNav ul ul li:first-child {
+	padding-top: 2em;
+}
+
+/* -------- Third Level --------- */
+
+#framework-root .primaryNav ul ul ul {
+	margin-top: .6em;
+	padding-top: .6em;
+	padding-bottom: .625em;
+}
+#framework-root .primaryNav ul ul ul li {
+	padding-top: .3125em;
+	padding-bottom: .3125em;
+}
+#framework-root .primaryNav ul ul ul li a {
+	background-color: #ff9d00;
+	font-size: .75em;
+	padding: .75em;
+	width: 90%;
+	margin-right: 0;
+	margin-left: auto;
+}
+#framework-root .primaryNav ul ul ul li a:hover {
+	background-color: #ff831b;
+}
+#framework-root .primaryNav ul ul ul li:first-child {
+	padding-top: 1em;
+}
+#framework-root .primaryNav ul ul ul li a:link:after,
+#framework-root .primaryNav ul ul ul li a:visited:after {
+	font-size: .75em;
+}
+
+/* --------	Fourth Level --------- */
+
+#framework-root .primaryNav ul ul ul ul {
+	margin-top: 0;
+	padding-top: .3125em;
+	padding-bottom: .3125em;
+}
+#framework-root .primaryNav ul ul ul ul li a {
+	background-color: #de003a;
+	padding: .75em ;
+	width: 80%;
+}
+#framework-root .primaryNav ul ul ul ul li a:hover {
+	background-color: #c20035;
+}
+#framework-root .primaryNav ul ul ul ul li a:link:after,
+#framework-root .primaryNav ul ul ul ul li a:visited:after {
+	display: none;
+}
+
+/* ------------------------------------------------------------
+	Connecting Lines:
+	Uncomment 'border-color: red' for debugging
+------------------------------------------------------------ */
+
+#framework-root .primaryNav ul:before,
+#framework-root .primaryNav ul:after,
+#framework-root .primaryNav ul li:before,
+#framework-root .primaryNav ul li:after {
+	display: block;
+	content: '';
+	position: absolute;
+	border-width: 0;
+	border-color: #e3e3e3;
+	border-style: solid;
+	z-index: -1;
+	border-color: black;
+}
+#framework-root .primaryNav > ul > li:before {
+	height: 1.375em;
+	top: -1.375em;;
+	right: calc(50% + .625em);
+	width: calc(100% - 2px);
+	border-top-width: 2px;
+	border-right-width: 2px;
+}
+#framework-root .primaryNav > ul > li:first-child + li:before {
+	border-top-width: 0;
+	height: 5em;
+	top: -5em;
+	/* border-color: red; */
+}
+#framework-root .primaryNav ul ul li:after {
+	width: 50%;
+	height: .6875em;
+	top: 0;
+	right: 1px;
+	border-left-width: 2px;
+	/* border-color: red */;
+}
+#framework-root .primaryNav ul ul li:first-child:before {
+	width: 50%;
+	height: 1.3125em;
+	top: .6875em;
+	right: 1px;
+	border-left-width: 2px;
+	/* border-color: red; */
+}
+#framework-root .primaryNav > ul > li:last-child:after {
+	border-bottom-width: 0;
+}
+#framework-root .primaryNav ul ul ul li:before {
+	width: calc(50% - 5px) !important;
+	height: calc(100% - 2px);
+	top: -50%;
+	left: 0;
+	border-left-width: 2px;
+	border-bottom-width: 2px;
+	/* border-color: red; */
+}
+#framework-root .primaryNav ul ul ul li:first-child:before {
+	height: 2.125em;
+	top: -1px;
+	border-top-width: 2px;
+	/* border-color: red; */
+}
+#framework-root .primaryNav ul ul ul:before {
+	width: 50%;
+	height: 1.25em;
+	top: -10px;
+	right: 1px;
+	border-left-width: 2px;
+	/* border-color: red; */
+}
+#framework-root .primaryNav ul ul ul li:after {
+	border-width: 0;
+}
+#framework-root .primaryNav ul ul ul ul li:before,
+#framework-root.primaryNav ul ul ul ul li:first-child:before {
+	display: none;
+}
+
+#framework-root .primaryNav ul ul ul ul:before {
+	width: 1px;
+	height: calc(100% + 2.5em);
+	top: -2.5em;
+	left: 0;
+	border-left-width: 2px;
+	/* border-color: red; */
+}
+
+/* ------------------------------------------------------------
+	Utility Navigation
+------------------------------------------------------------ */
+
+#framework-root .utilityNav {
+	float: right;
+	margin-top: 0;
+	margin-bottom: -.25em;
+	margin-right: 1.25em;
+	max-width: 48%;
+	list-style-type: none;
+}
+#framework-root .utilityNav li {
+	padding: 0 0 .625em .625em;
+	display: inline-block;
+}
+#framework-root .utilityNav li:first-child,
+#framework-root .utilityNav li a {
+	display: block;
+	font-size: .75em;
+	font-weight: 700;
+	padding: .75em 1em;
+	font-weight: bold;
+	text-align: left;
+	color: white;
+	background-color: #ff9d00;
+	border: 1px solid  rgba(0,0,0,.025);
+	box-shadow: 0px 2px 0 rgba(0,0,0,0.15);
+	text-shadow: 0 0 10px rgba(0,0,0,.15);
+	text-decoration: none;
+}
+#framework-root .utilityNav li a:hover {
+	background-color: #ff831b;
+}
+#framework-root .utilityNav li a:link:after,
+#framework-root .utilityNav li a:visited:after {
+	color: rgba(255,255,255,.75);
+	font-size: .75em;
+	font-weight: 600;
+	margin-top: .25em;
+}
+
+/* ------------------------------------------------------------
+	Responsive Styles
+------------------------------------------------------------ */
+
+@media screen and (max-width: 30em) {
+	#framework-root .primaryNav ul {
+		display: block;
+	}
+	#framework-root .primaryNav li {
+		width: 100%;
+		padding-right: 0;
+	}
+	#framework-root .primaryNav #home {
+		width: 100%;
+		position: relative;
+		margin-bottom: -1em;
+		margin-top: 0;
+	}
+	#framework-root .utilityNav {
+		float: none;
+		display: block;
+		width: 100%;
+		text-align: right;
+		margin-bottom: 2.5em;
+		max-width: 100%;
+	}
+}
+
+/* two column */
+@media screen and (min-width: 30em) {
+	#framework-root .primaryNav > ul > li {	max-width: 50%;	}
+}
+/* three column */
+@media screen and (min-width: 38.5em) {
+	#framework-root .primaryNav > ul > li {	max-width: 33%;	}
+}
+/* four column */
+@media screen and (min-width: 50em) {
+	#framework-root .primaryNav > ul > li {	max-width: 25%;	}
+}
+/* five column */
+@media screen and (min-width: 61em) {
+	#framework-root .primaryNav > ul > li {	max-width: 20%;	}
+}
+/* six column */
+@media screen and (min-width: 73em) {
+	#framework-root .primaryNav > ul > li {	max-width: 16.66%;	}
+}
+/* seven column */
+@media screen and (min-width: 84.5em) {
+	#framework-root .primaryNav > ul > li {	max-width: 14.285%;	}
+}
+/* eight column */
+@media screen and (min-width: 96em) {
+	#framework-root .primaryNav > ul > li {	max-width: 12.5%; }
+}
+/* nine column */
+@media screen and (min-width: 107.5em) {
+	#framework-root .primaryNav > ul > li {	max-width: 11.11%; }
+}
+/* ten column */
+@media screen and (min-width: 119em) {
+	#framework-root .primaryNav > ul > li {	max-width: 10%; }
+}
+
+/* ============================================================
+   Column-based colouring (compatible with current CSS)
+   ============================================================ */
+
+/* Column 0 – Framework */
+#framework-root .primaryNav > ul > li:nth-child(1) a {
+    background-color: #2c3e50;
+}   
+#framework-root .primaryNav > ul > li:nth-child(1) a:hover {
+    background-color: #1a252f;
+}
+
+/* Column 1 – Objective */
+#framework-root .primaryNav > ul > li:nth-child(2) a {
+    background-color: #1e90ff;
+}
+#framework-root .primaryNav > ul > li:nth-child(2) a:hover {
+    background-color: #1874cd;
+}
+
+/* Column 2 – Structure */
+#framework-root .primaryNav > ul > li:nth-child(3) a {
+    background-color: #8e44ad;
+}
+#framework-root .primaryNav > ul > li:nth-child(3) a:hover {
+    background-color: #6c3483;
+}
+
+/* Column 3 – Strategy */
+#framework-root .primaryNav > ul > li:nth-child(4) a {
+    background-color: #16a085;
+}
+#framework-root .primaryNav > ul > li:nth-child(4) a:hover {
+    background-color: #117a65 ;
+}
+
+/* Column 4 – Constrains */
+#framework-root .primaryNav > ul > li:nth-child(5) a {
+    background-color: #e67e22 ;
+}
+#framework-root .primaryNav > ul > li:nth-child(5) a:hover {
+    background-color: #ca6f1e;
+}
+
+/* Column 5 – Utility */
+#framework-root .primaryNav > ul > li:nth-child(6) a {
+    background-color: #27ae60;
+}
+#framework-root .primaryNav > ul > li:nth-child(6) a:hover {
+    background-color: #1e8449;
+}
+
+/* Column 6 – Risk */
+#framework-root .primaryNav > ul > li:nth-child(7) a {
+    background-color: #c0392b;
+}
+#framework-root .primaryNav > ul > li:nth-child(7) a:hover {
+    background-color: #922b21;
+}

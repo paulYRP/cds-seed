@@ -1,0 +1,71 @@
+/* ----- Navbar style ----- */
+
+html, body {
+  margin: 0;
+  padding: 0;
+
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #111;
+
+  height: 100%;
+  overflow-x: hidden;
+}
+
+
+.site-navbar {
+  background-color: black;
+  color: white;
+  box-sizing: border-box;
+  height: 94px;
+  padding: 10px 12px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.site-navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: 600;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+  margin-left: 20px;
+}
+
+.site-navbar a:hover {
+  color: #FFD700;
+}
+
+/* Highlight active page */
+.site-navbar a.site-active {
+  color: #FFD700;
+}
+
+.site-navbar {
+  margin-bottom: 0 !important;   /* remove any space below navbar */
+}
+
+.site-nav-logo {
+  height: 70px;
+  width: 70px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  margin-right: 15px;
+}
+
+.site-nav-spacer {
+  margin-left: auto;
+}
+
+.site-content {
+  margin: 0;
+  padding: 0;
+}

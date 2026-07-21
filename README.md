@@ -1,14 +1,14 @@
 <p align="center">
-  <img src="assets/readme/cds.png" alt="Queensland University of Technology" width="700">
+  <img src="assets/readme/cds.png" alt="Queensland University of Technology" hight= "100" width="700">
 </p>
+
+# Synthetic Data in Sports
 
 <p align="center">
   <a href="https://paulyrp.github.io/cds-seed/">
     <img src="assets/readme/website.gif" alt="Walkthrough of the CDS website" width="900">
   </a>
 </p>
-
-# Synthetic Data in Sports
 
 This website presents an exploration of common data science applications in sport and the opportunities for integrating synthetic data into research and practice.
 
@@ -25,7 +25,7 @@ This website presents an exploration of common data science applications in spor
 
 ## Framework
 
-The framework provides a step-by-step structure for considering the objective, structure, strategy, constraints, utility, and risk of a synthetic data project. Its interactive boxes allow users to review supporting evidence and open linked sources.
+The framework provides interactive boxes allowing users to review supporting evidence and open linked sources.
 
 <p align="center">
   <a href="https://paulyrp.github.io/cds-seed/framework.html">

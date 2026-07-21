@@ -1,5 +1,3 @@
-# Synthetic Data in Sports
-
 <p align="center">
   <img src="assets/readme/cds.png" alt="Queensland University of Technology" width="700">
 </p>
@@ -9,6 +7,8 @@
     <img src="assets/readme/website.gif" alt="Walkthrough of the CDS website" width="900">
   </a>
 </p>
+
+# Synthetic Data in Sports
 
 This website presents an exploration of common data science applications in sport and the opportunities for integrating synthetic data into research and practice.
 

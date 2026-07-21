@@ -61,6 +61,12 @@ html, body {
   margin-right: 15px;
 }
 
+.site-navbar a.site-nav-home {
+  display: flex;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
 .site-nav-spacer {
   margin-left: auto;
 }

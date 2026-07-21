@@ -14,6 +14,7 @@ OUTPUT_DIR = ROOT / "docs"
 TEMPLATE_PATH = ROOT / "templates" / "static_page.html"
 
 PAGES = (
+    ("index.html", "synthetic.html", "synthetic", "Synthetic Sport Datasets"),
     ("synthetic.html", "synthetic.html", "synthetic", "Synthetic Sport Datasets"),
     ("real.html", "real.html", "real", "Real Sport Datasets"),
     ("summary.html", "summary.html", "summary", "Summary"),
@@ -48,9 +49,11 @@ def navigation(active_page: str) -> str:
     return "\n".join(
         (
             '  <nav class="site-navbar" aria-label="Main navigation">',
-            '    <img src="style/qut.png?v=1" class="site-nav-logo"',
-            '         alt="Queensland University of Technology" width="70" height="70"',
-            '         decoding="async">',
+            '    <a href="./" class="site-nav-home" aria-label="CDS home">',
+            '      <img src="style/qut.png?v=1" class="site-nav-logo"',
+            '           alt="Queensland University of Technology" width="70" height="70"',
+            '           decoding="async">',
+            '    </a>',
             '    <div class="site-nav-spacer"></div>',
             *links,
             "  </nav>",

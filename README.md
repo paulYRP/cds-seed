@@ -5,12 +5,16 @@
 # Synthetic Data in Sports
 
 <p align="center">
+  <img src="https://img.shields.io/badge/SAGE%20Publishing-DOI%2010.1177%2F22150218261474554-b31b1b" alt="SAGE Publishing DOI: 10.1177/22150218261474554">
+</p>
+
+<p align="center">
   <a href="https://paulyrp.github.io/cds-seed/">
     <img src="assets/readme/website.gif" alt="Walkthrough of the CDS website" width="900">
   </a>
 </p>
 
-This website presents an exploration of common data science applications in sport and the opportunities for integrating synthetic data into research and practice.
+This is the companion website for the manuscript *Synthetic Data Generation in Sport: A Framework for Design, Privacy, Utility, Fidelity, and Deployment*. It brings together the reviewed evidence, sport datasets, supporting analyses, and an interactive framework for designing and evaluating synthetic data projects.
 
 **[Explore the website](https://paulyrp.github.io/cds-seed/)**
 

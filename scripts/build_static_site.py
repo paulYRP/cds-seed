@@ -32,6 +32,16 @@ NAV_ITEMS = (
     ("data", "Data", "data.html"),
 )
 
+GOOGLE_TAG = """<!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8DT9W0F6P3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-8DT9W0F6P3');
+  </script>"""
+
 COMMON_HEAD = """<link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -68,7 +78,7 @@ def build_report_document(source: str, active_page: str) -> str:
     if not head_match or not body_match:
         raise ValueError("Generated report must contain both <head> and <body> tags")
 
-    source = source[: head_match.end()] + "\n" + COMMON_HEAD + source[head_match.end() :]
+    source = source[: head_match.end()] + "\n" + GOOGLE_TAG + "\n  " + COMMON_HEAD + source[head_match.end() :]
     body_match = re.search(r"<body(?:\s[^>]*)?>", source, flags=re.IGNORECASE)
     assert body_match is not None
     return source[: body_match.end()] + "\n" + navigation(active_page) + source[body_match.end() :]
@@ -78,6 +88,7 @@ def build_framework_document(source: str, title: str, active_page: str) -> str:
     template = TEMPLATE_PATH.read_text(encoding="utf-8")
     replacements = {
         "{{TITLE}}": title,
+        "{{GOOGLE_TAG}}": GOOGLE_TAG,
         "{{COMMON_HEAD}}": COMMON_HEAD,
         "{{NAVIGATION}}": navigation(active_page),
         "{{CONTENT}}": source,

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/readme/cds.png" alt="Queensland University of Technology" height= "100" width="700">
+  <img src="assets/readme/cds.png" alt="Queensland University of Technology" height= "200" width="700">
 </p>
 
 # Synthetic Data in Sports

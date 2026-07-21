@@ -1,4 +1,4 @@
-# Common Data Science and Synthetic Data in Sports
+# Synthetic Data in Sports
 
 <p align="center">
   <img src="assets/readme/cds.png" alt="Queensland University of Technology" width="700">

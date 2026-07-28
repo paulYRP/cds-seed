@@ -114,14 +114,14 @@
         },
         {
           label: "Methods",
-          title: "Figure 1 organises the generation approaches",
-          body: "The figure groups neural-network, simulation, and statistical approaches, then connects each group with a short explanation and examples from sport.",
-          caption: "Figure 1. Synthetic data generation approaches reviewed in the manuscript.",
+          title: "Generation approaches are organised by method",
+          body: "The methodological overview groups neural-network, simulation, and statistical approaches, then connects each group with a short explanation and examples from sport.",
+          caption: "Synthetic data generation approaches reviewed in the manuscript.",
           references: [refs.morra, refs.raymond, refs.naughton, refs.fister],
           visual: {
             kind: "source-image",
             index: 0,
-            alt: "Figure 1 showing synthetic data generation approaches and sport examples"
+            alt: "Methodological overview of synthetic data generation approaches and sport examples"
           }
         },
         {
@@ -155,7 +155,7 @@
         {
           label: "Diversity",
           title: "Dataset characteristics vary widely",
-          body: "The first figure introduces the range of sports, participants, formats, and measurements represented in the catalogue.",
+          body: "This overview introduces the range of sports, participants, formats, and measurements represented in the catalogue.",
           references: [refs.realPage],
           visual: { kind: "plot", index: 0 }
         },
@@ -175,9 +175,9 @@
         },
         {
           label: "Suitability",
-          title: "Figure 2 compares practical suitability",
-          body: "The ranking summarises how well datasets align with criteria used to assess their potential for statistical or generative applications.",
-          caption: "Figure 2. Comparative ranking of real sport datasets.",
+          title: "Datasets are compared for practical suitability",
+          body: "The comparative ranking summarises how well datasets align with criteria used to assess their potential for statistical or generative applications.",
+          caption: "Comparative ranking of real sport datasets.",
           references: [refs.realPage, refs.dataPage],
           visual: { kind: "plot", index: 3 }
         },
@@ -205,20 +205,20 @@
         {
           label: "Methods",
           title: "Generation approaches solve different problems",
-          body: "Figure 1 groups the reviewed methods and shows why the choice of approach depends on the sport context, available evidence, and intended use.",
-          caption: "Figure 1. Synthetic data generation approaches reviewed in the manuscript.",
+          body: "The methodological overview groups the reviewed approaches and shows why the choice of method depends on the sport context, available evidence, and intended use.",
+          caption: "Synthetic data generation approaches reviewed in the manuscript.",
           references: [refs.morra, refs.raymond, refs.naughton],
           visual: {
             kind: "source-image",
             index: 0,
-            alt: "Figure 1 showing synthetic data generation approaches and sport examples"
+            alt: "Methodological overview of synthetic data generation approaches and sport examples"
           }
         },
         {
           label: "Suitability",
           title: "Real datasets differ in their practical value",
-          body: "Figure 2 helps compare datasets against the criteria needed for analysis and generation, rather than judging them only by availability.",
-          caption: "Figure 2. Comparative ranking of real sport datasets.",
+          body: "The comparative ranking helps assess datasets against criteria needed for analysis and generation, rather than judging them only by availability.",
+          caption: "Comparative ranking of real sport datasets.",
           references: [refs.realPage, refs.dataPage],
           visual: { kind: "plot", index: 0 }
         },

@@ -142,6 +142,76 @@
     margin-bottom: 1em;
 }
 
+/* Study evidence is presented as short, scannable findings. */
+#framework-root #framework-panel.is-study-panel {
+    background: #f3f5f7;
+}
+
+#framework-root #framework-panel .study-panel-intro {
+    margin: -0.45em 0 1.4em;
+    padding: 0.8em 1em;
+    color: #263238;
+    background: #fff;
+    border-left: 4px solid var(--panelTitleColor);
+    border-radius: 0 0.45em 0.45em 0;
+    box-shadow: 0 0.15em 0.55em rgba(0, 0, 0, 0.06);
+}
+
+#framework-root #framework-panel .study-question {
+    margin: 1em 0 0;
+    padding: 0.9em 1em 0.55em;
+    background: #fff;
+    border: 1px solid var(--panelTitleBorder);
+    border-bottom: 0;
+    border-radius: 0.55em 0.55em 0 0;
+}
+
+#framework-root #framework-panel .study-question b {
+    color: var(--panelTitleColor);
+    font-size: 1.04em;
+}
+
+#framework-root #framework-panel .study-answer {
+    margin: 0 0 1em;
+    padding: 0.15em 1.2em 0.9em 2.4em;
+    background: #fff;
+    border: 1px solid var(--panelTitleBorder);
+    border-top: 0;
+    border-radius: 0 0 0.55em 0.55em;
+}
+
+#framework-root #framework-panel .study-answer li {
+    margin: 0.35em 0;
+    line-height: 1.55;
+}
+
+#framework-root #framework-panel .study-not-reported {
+    color: #626b73;
+    font-style: italic;
+}
+
+#framework-root #framework-panel .study-not-reported-summary {
+    margin-top: 1.2em;
+    padding: 0.9em 1em;
+    color: #4d565d;
+    background: #eef1f3;
+    border: 1px dashed #aab3b9;
+    border-radius: 0.55em;
+}
+
+#framework-root #framework-panel .study-not-reported-summary strong {
+    display: block;
+    margin-bottom: 0.25em;
+    color: #3e474d;
+}
+
+#framework-root #framework-panel .study-not-reported-summary p {
+    margin: 0;
+    color: #626b73;
+    font-size: 0.92em;
+    line-height: 1.5;
+}
+
 /* ------------------------------------------------------------
 	Page Styles
 ------------------------------------------------------------ */

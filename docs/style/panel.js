@@ -2954,12 +2954,144 @@ ris_Shah: {
 // ------------------------------------------------------------
 // Helper: update panel content + theme
 // ------------------------------------------------------------
+const studySections = {
+    "obj_": "Objective",
+    "struc_": "Structure",
+    "strat_": "Generation Strategy",
+    "con_": "Constraints",
+    "uti_": "Utility and Fidelity",
+    "ris_": "Risk and Deployment"
+};
+
+const friendlyQuestionLabels = new Map([
+    ["What limitation in real data are you trying to overcome?", "Why synthetic data was needed"],
+    ["What task or application should the synthetic data support (training, testing, benchmarking, privacy protection, or scenario exploration)?", "What the data was designed to support"],
+    ["Are you aiming to replace, augment, or stress-test real data?", "How it complements real data"],
+    ["Who are the end users (researchers, practitioners, regulators, industry)?", "Who can use it"],
+
+    ["What is the total population or system the data represent?", "What the dataset represents"],
+    ["Is the synthetic dataset a sample of this totality, and should it preserve its distribution?", "How the sample relates to the wider system"],
+    ["Which statistical properties (distributions, correlations, ranges) must be preserved?", "Properties that need to be preserved"],
+    ["What hierarchies or temporal structures are intrinsic to the data?", "Important hierarchy or timing"],
+    ["How should rare, extreme, or boundary cases appear in the structure?", "Rare and boundary cases"],
+
+    ["Are large, representative real datasets available?", "Real data available"],
+    ["Are statistical assumptions acceptable for the task?", "Assumptions used"],
+    ["How much control and interpretability are required?", "Control and interpretability"],
+    ["How sensitive is the task to generation errors or artefacts?", "Sensitivity to errors"],
+    ["Should generation be statistical, simulation-based, neural network-based, or hybrid?", "Generation approach"],
+
+    ["What aspects of the data may cause privacy or disclosure risks?", "Privacy and disclosure"],
+    ["Where might domain shift occur between synthetic and real data?", "Possible differences from real data"],
+    ["Which classes or outcomes are naturally imbalanced?", "Natural class imbalance"],
+    ["Should imbalance be preserved, reduced, or explicitly controlled?", "How imbalance is handled"],
+    ["Which constraints must be strictly enforced, and which can be relaxed?", "Rules that must hold"],
+
+    ["Do key variable distributions match those observed in real data?", "Distribution similarity"],
+    ["Are relationships and dependencies preserved?", "Relationships preserved"],
+    ["How do models trained on synthetic data perform on real or held-out data?", "Performance on real or held-out data"],
+    ["Where does utility matter most, and where can it be relaxed?", "Where usefulness matters"],
+    ["Where does fidelity matter most, and where can it be relaxed?", "Where realism matters"],
+
+    ["What assumptions and simplifications were made during generation?", "Simplifications made"],
+    ["What are the known strengths and limitations of the synthetic data?", "Strengths and limitations"],
+    ["How should results derived from synthetic data be reported?", "How results should be communicated"]
+]);
+
+const normalisePanelText = value => value.replace(/\s+/g, " ").trim();
+
+const makeStudyPanelFriendly = key => {
+    const sectionEntry = Object.entries(studySections)
+        .find(([prefix]) => key.startsWith(prefix));
+
+    panel.classList.toggle("is-study-panel", Boolean(sectionEntry));
+    if (!sectionEntry) return;
+
+    const sectionName = sectionEntry[1];
+    const heading = panel.querySelector("h2");
+    const questionElements = new Map();
+
+    if (heading) {
+        const intro = document.createElement("p");
+        intro.className = "study-panel-intro";
+        intro.textContent = `How this study informs the ${sectionName} part of the framework.`;
+        heading.insertAdjacentElement("afterend", intro);
+    }
+
+    panel.querySelectorAll("b").forEach(label => {
+        const friendlyLabel = friendlyQuestionLabels.get(
+            normalisePanelText(label.textContent)
+        );
+        if (!friendlyLabel) return;
+
+        label.textContent = friendlyLabel;
+        const question = label.closest("p");
+        if (!question) return;
+
+        question.classList.add("study-question");
+        questionElements.set(friendlyLabel, question);
+        let answer = question.querySelector("ul");
+
+        if (!answer) {
+            let candidate = question.nextElementSibling;
+            while (candidate && candidate.tagName === "P" && !candidate.textContent.trim()) {
+                candidate = candidate.nextElementSibling;
+            }
+            if (candidate?.tagName === "UL") answer = candidate;
+        }
+
+        if (answer) {
+            answer.classList.add("study-answer");
+            answer.dataset.studyQuestion = friendlyLabel;
+        }
+    });
+
+    const notReported = [];
+    panel.querySelectorAll(".study-answer").forEach(answer => {
+        const items = Array.from(answer.querySelectorAll("li"));
+        const onlyNotReported = items.length > 0 && items.every(item => {
+            const value = normalisePanelText(item.textContent).replace(/\.$/, "");
+            return value.toLowerCase() === "no information";
+        });
+
+        if (!onlyNotReported) return;
+
+        const questionLabel = answer.dataset.studyQuestion;
+        if (questionLabel) notReported.push(questionLabel);
+        questionElements.get(questionLabel)?.remove();
+        answer.remove();
+    });
+
+    panel.querySelectorAll("li").forEach(item => {
+        const value = normalisePanelText(item.textContent).replace(/\.$/, "");
+        if (value.toLowerCase() !== "no information") return;
+
+        item.textContent = "This point was not reported in the study.";
+        item.classList.add("study-not-reported");
+    });
+
+    if (notReported.length) {
+        const note = document.createElement("aside");
+        note.className = "study-not-reported-summary";
+
+        const noteTitle = document.createElement("strong");
+        noteTitle.textContent = "Not reported in this study";
+
+        const noteCopy = document.createElement("p");
+        noteCopy.textContent = notReported.join("; ");
+
+        note.append(noteTitle, noteCopy);
+        panel.appendChild(note);
+    }
+};
+
 const updatePanel = (key) => {
     if (!panelContent[key] || !panel) return;
 
     const entry = panelContent[key];
 
     panel.innerHTML = entry.html;
+    makeStudyPanelFriendly(key);
     panel.style.setProperty("--panelTitleColor", entry.titleColor);
     panel.style.setProperty("--panelTitleBorder", entry.borderColor);
 };

@@ -1,12 +1,12 @@
-<p align="center">
-  <img src="assets/readme/cds.png" alt="Queensland University of Technology" height= "200" width="700">
-</p>
-
-# Synthetic Data in Sports
-
-<p align="center">
+<p align="left">
   <img src="https://img.shields.io/badge/SAGE-DOI%2010.1177%2F22150218261474554-b31b1b" alt="SAGE DOI: 10.1177/22150218261474554">
+
 </p>
+
+<h1>
+  <img src="assets/readme/cds.png" alt="Queensland University of Technology logo" height="40" align="right">
+  Synthetic Data in Sports
+</h1>
 
 <p align="center">
   <a href="https://paulyrp.github.io/cds-seed/">
@@ -15,6 +15,8 @@
 </p>
 
 This is the companion website for the manuscript *Synthetic Data Generation in Sport: A Framework for Design, Privacy, Utility, Fidelity, and Deployment*. It brings together the reviewed evidence, sport datasets, supporting analyses, and an interactive framework for designing and evaluating synthetic data projects.
+
+Each section begins with a concise visual introduction to its purpose and key figures before users explore the complete evidence.
 
 **[Explore the website](https://paulyrp.github.io/cds-seed/)**
 

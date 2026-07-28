@@ -3,7 +3,46 @@
 <html>
 
 <head>
-<!-- Google tag (gtag.js) -->
+  <style>
+    html.cds-story-booting,
+    html.cds-story-booting body {
+      background: #000 !important;
+    }
+    html.cds-story-booting body > * {
+      visibility: hidden !important;
+    }
+    html.cds-story-booting body > .site-navbar,
+    html.cds-story-booting body > .cds-story {
+      visibility: visible !important;
+    }
+    html.cds-story-booting body::after {
+      position: fixed;
+      inset: 94px 0 0;
+      z-index: 899;
+      content: "";
+      background:
+        radial-gradient(circle at 18% 22%, rgba(255, 212, 0, 0.075), transparent 30%),
+        linear-gradient(135deg, #000 0%, #080808 54%, #171717 100%);
+    }
+  </style>
+  <script>
+    (function () {
+      var showIntroduction = true;
+      try {
+        showIntroduction =
+          window.sessionStorage.getItem('cdsSeedIntroMode') !== 'full';
+      } catch (error) {
+        showIntroduction = true;
+      }
+      if (showIntroduction) {
+        document.documentElement.classList.add('cds-story-booting');
+        window.__cdsStoryBootTimer = window.setTimeout(function () {
+          document.documentElement.classList.remove('cds-story-booting');
+        }, 10000);
+      }
+    }());
+  </script>
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-8DT9W0F6P3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -16,6 +55,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style/format.css?v=3">
+  <link rel="stylesheet" href="style/story.css?v=12">
+  <script defer src="style/story-data.js?v=5"></script>
+  <script defer src="style/story.js?v=9"></script>
 
 <meta charset="utf-8" />
 <meta name="generator" content="pandoc" />
@@ -3514,21 +3556,56 @@ display: none;
 
 </head>
 
-<body>
+<body data-story-page="summary">
   <nav class="site-navbar" aria-label="Main navigation">
-    <a href="./" class="site-nav-home" aria-label="CDS home">
+    <a href="./" class="site-nav-home" aria-label="CDS home"
+       data-story-target="home">
       <img src="style/qut.png?v=1" class="site-nav-logo"
            alt="Queensland University of Technology" width="70" height="70"
            decoding="async">
     </a>
     <div class="site-nav-spacer"></div>
-    <a href="synthetic.html">Synthetic</a>
-    <a href="real.html">Real</a>
-    <a href="summary.html" class="site-active" aria-current="page">Summary</a>
-    <a href="report.html">Report</a>
-    <a href="framework.html">Framework</a>
-    <a href="data.html">Data</a>
+    <a href="synthetic.html" data-story-target="synthetic">Synthetic</a>
+    <a href="real.html" data-story-target="real">Real</a>
+    <a href="summary.html" data-story-target="summary" class="site-active" aria-current="page">Summary</a>
+    <a href="report.html" data-story-target="report">Report</a>
+    <a href="framework.html" data-story-target="framework">Framework</a>
+    <a href="data.html" data-story-target="data">Data</a>
   </nav>
+  <button class="cds-story-launcher" type="button" data-story-launcher hidden>
+    <span aria-hidden="true">▶</span>
+    Replay
+  </button>
+  <section class="cds-story" data-story-root role="dialog"
+           aria-labelledby="cds-story-title" hidden>
+    <header class="cds-story__header">
+      <button class="cds-story__skip" type="button" data-story-close>
+        Explore
+      </button>
+    </header>
+    <div class="cds-story__stage">
+      <figure class="cds-story__visual" data-story-visual
+              aria-labelledby="cds-story-caption"></figure>
+      <article class="cds-story__bubble" aria-live="polite">
+        <span class="cds-story__step-label" data-story-step-label></span>
+        <h1 id="cds-story-title" data-story-title></h1>
+        <p data-story-copy></p>
+        <p class="cds-story__caption" id="cds-story-caption"
+           data-story-caption></p>
+        <div class="cds-story__references" data-story-references
+             aria-label="References from this website"></div>
+      </article>
+    </div>
+    <footer class="cds-story__footer">
+      <div class="cds-story__progress" data-story-progress
+           aria-label="Introduction progress"></div>
+      <div class="cds-story__controls">
+        <button type="button" data-story-previous>Previous</button>
+        <span data-story-count></span>
+        <button type="button" class="cds-story__next" data-story-next>Next</button>
+      </div>
+    </footer>
+  </section>
 
 
 <div class="container-fluid main-container">

@@ -4,3 +4,7 @@ __pycache__/
 .venv/
 venv/
 
+# Local website source and build tooling (kept locally, not published)
+/content/
+/scripts/
+/templates/

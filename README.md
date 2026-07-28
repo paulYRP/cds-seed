@@ -4,7 +4,7 @@
 </p>
 
 <h1>
-  <img src="assets/readme/cds.png" alt="Queensland University of Technology logo" height="40" align="right">
+  <img src="assets/readme/cds.png" alt="Queensland University of Technology logo" height="40" width=120 align="right">
   Synthetic Data in Sports
 </h1>
 

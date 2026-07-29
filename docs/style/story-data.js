@@ -322,10 +322,10 @@
         },
         {
           label: "Interaction",
-          title: "The full framework provides evidence on demand",
-          body: "Select a study once to read its plain-language explanation. Select a linked study again to open its source.",
+          title: "Select a sport and follow one study",
+          body: "Choose a sport, then a study. A short overview introduces the paper before six centred dimensions reveal the recorded questions and answers.",
           references: [refs.frameworkPage, refs.dataPage],
-          visual: flow("SELECT", "REVIEW", "SOURCE")
+          visual: flow("SPORT", "STUDY", "EVIDENCE")
         }
       ]
     },

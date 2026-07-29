@@ -8,3 +8,4 @@ venv/
 /content/
 /scripts/
 /templates/
+*.pdf

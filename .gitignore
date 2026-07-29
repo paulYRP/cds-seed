@@ -9,3 +9,4 @@ venv/
 /scripts/
 /templates/
 *.pdf
+/run-local.ps1

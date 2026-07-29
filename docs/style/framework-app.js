@@ -90,7 +90,7 @@
     {
       id: "strategy",
       code: "G",
-      label: "Generation strategy",
+      label: "Generation",
       phase: "Generate",
       prefix: "strat_",
       prompt: "How was the data generated?",
@@ -120,7 +120,7 @@
     {
       id: "utility",
       code: "U",
-      label: "Utility and fidelity",
+      label: "Utility",
       phase: "Evaluate",
       prefix: "uti_",
       prompt: "Was the result useful and realistic?",
@@ -135,7 +135,7 @@
     {
       id: "risk",
       code: "R",
-      label: "Risk and deployment",
+      label: "Risk",
       phase: "Deploy",
       prefix: "ris_",
       prompt: "How should the result be used?",
@@ -357,10 +357,7 @@
     const name = document.createElement("span");
     name.className = "framework-dimension-name";
     name.textContent = dimension.label;
-    const prompt = document.createElement("span");
-    prompt.className = "framework-dimension-prompt";
-    prompt.textContent = dimension.prompt;
-    copy.append(name, prompt);
+    copy.appendChild(name);
 
     const action = document.createElement("span");
     action.className = "framework-dimension-action";
@@ -451,16 +448,13 @@
       return card;
     }
 
-    const answerLabel = document.createElement("p");
-    answerLabel.className = "framework-response-answer-label";
-    answerLabel.textContent = answers.length === 1 ? "Recorded answer" : "Recorded answers";
     const list = document.createElement("ul");
     answers.forEach(answer => {
       const item = document.createElement("li");
       item.textContent = answer;
       list.appendChild(item);
     });
-    card.append(answerLabel, list);
+    card.appendChild(list);
     return card;
   };
 

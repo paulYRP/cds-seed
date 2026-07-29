@@ -8,6 +8,7 @@
   const results = root?.querySelector("[data-framework-results]");
   const overview = root?.querySelector("[data-framework-study-overview]");
   const dimensionGrid = root?.querySelector("[data-framework-dimensions]");
+  let responseResizeObserver = null;
 
   if (
     !root ||
@@ -62,7 +63,6 @@
       id: "objective",
       code: "O",
       label: "Objective",
-      phase: "Define",
       prefix: "obj_",
       prompt: "Why was synthetic data needed?",
       questions: [
@@ -76,7 +76,6 @@
       id: "structure",
       code: "S",
       label: "Structure",
-      phase: "Define",
       prefix: "struc_",
       prompt: "What must the data represent?",
       questions: [
@@ -91,7 +90,6 @@
       id: "strategy",
       code: "G",
       label: "Generation",
-      phase: "Generate",
       prefix: "strat_",
       prompt: "How was the data generated?",
       questions: [
@@ -106,7 +104,6 @@
       id: "constraints",
       code: "C",
       label: "Constraints",
-      phase: "Generate",
       prefix: "con_",
       prompt: "What had to remain valid and safe?",
       questions: [
@@ -121,7 +118,6 @@
       id: "utility",
       code: "U",
       label: "Utility",
-      phase: "Evaluate",
       prefix: "uti_",
       prompt: "Was the result useful and realistic?",
       questions: [
@@ -136,7 +132,6 @@
       id: "risk",
       code: "R",
       label: "Risk",
-      phase: "Deploy",
       prefix: "ris_",
       prompt: "How should the result be used?",
       questions: [
@@ -343,9 +338,9 @@
     const button = document.createElement("button");
     button.type = "button";
     button.className = "framework-dimension-node";
-    button.dataset.phase = dimension.phase;
     button.dataset.dimensionId = dimension.id;
     button.setAttribute("aria-pressed", "false");
+    button.setAttribute("aria-expanded", "false");
 
     const code = document.createElement("span");
     code.className = "framework-dimension-code";
@@ -378,44 +373,153 @@
     5: ["top-left", "top-right", "middle-left", "middle-right", "bottom-center"]
   };
 
-  const connectorPoints = {
-    "top-left": [420, 310, 275, 180],
-    "top-right": [580, 310, 725, 180],
-    "middle-left": [375, 380, 275, 380],
-    "middle-right": [625, 380, 725, 380],
-    "bottom-left": [420, 450, 275, 580],
-    "bottom-center": [500, 490, 500, 625],
-    "bottom-right": [580, 450, 725, 580]
-  };
-
-  const makeResponseConnectors = slots => {
+  const makeResponseConnectors = () => {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.classList.add("framework-response-connectors");
-    svg.setAttribute("viewBox", "0 0 1000 760");
     svg.setAttribute("preserveAspectRatio", "none");
     svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    return svg;
+  };
 
-    slots.forEach(slot => {
-      const points = connectorPoints[slot];
-      if (!points) return;
+  const makeTrackElement = (route, className) => {
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.classList.add(className);
+    path.setAttribute("d", route);
+    path.setAttribute("vector-effect", "non-scaling-stroke");
+    return path;
+  };
 
-      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-      line.setAttribute("x1", points[0]);
-      line.setAttribute("y1", points[1]);
-      line.setAttribute("x2", points[2]);
-      line.setAttribute("y2", points[3]);
-      line.setAttribute("vector-effect", "non-scaling-stroke");
-      svg.appendChild(line);
+  const roundedTrack = (source, target) => {
+    if (Math.abs(source.y - target.y) < 2) {
+      return `M ${source.x} ${source.y} H ${target.x}`;
+    }
 
-      const endpoint = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-      endpoint.setAttribute("cx", points[2]);
-      endpoint.setAttribute("cy", points[3]);
-      endpoint.setAttribute("r", "4");
-      endpoint.setAttribute("vector-effect", "non-scaling-stroke");
-      svg.appendChild(endpoint);
+    const elbowX = (source.x + target.x) / 2;
+    const horizontalDirection = Math.sign(target.x - source.x) || 1;
+    const verticalDirection = Math.sign(target.y - source.y) || 1;
+    const radius = Math.min(
+      24,
+      Math.abs(elbowX - source.x) / 2,
+      Math.abs(target.y - source.y) / 2
+    );
+
+    return [
+      `M ${source.x} ${source.y}`,
+      `H ${elbowX - horizontalDirection * radius}`,
+      `Q ${elbowX} ${source.y} ${elbowX} ${source.y + verticalDirection * radius}`,
+      `V ${target.y - verticalDirection * radius}`,
+      `Q ${elbowX} ${target.y} ${elbowX + horizontalDirection * radius} ${target.y}`,
+      `H ${target.x}`
+    ].join(" ");
+  };
+
+  const drawResponseConnectors = (map, svg, hub, cards) => {
+    const mapRect = map.getBoundingClientRect();
+    if (!mapRect.width || !mapRect.height) return;
+
+    svg.replaceChildren();
+    svg.setAttribute("viewBox", `0 0 ${mapRect.width} ${mapRect.height}`);
+
+    if (window.matchMedia("(max-width: 850px)").matches) return;
+
+    const hubRect = hub.getBoundingClientRect();
+    const hubBox = {
+      top: hubRect.top - mapRect.top,
+      right: hubRect.right - mapRect.left,
+      bottom: hubRect.bottom - mapRect.top,
+      left: hubRect.left - mapRect.left,
+      width: hubRect.width,
+      height: hubRect.height
+    };
+
+    const routes = cards.map(card => {
+      const slot = card.dataset.slot || "";
+      const cardRect = card.getBoundingClientRect();
+      const cardBox = {
+        top: cardRect.top - mapRect.top,
+        right: cardRect.right - mapRect.left,
+        bottom: cardRect.bottom - mapRect.top,
+        left: cardRect.left - mapRect.left,
+        width: cardRect.width,
+        height: cardRect.height
+      };
+
+      let source;
+      let target;
+      let route;
+
+      if (slot === "bottom-center") {
+        source = {
+          x: hubBox.left + hubBox.width / 2,
+          y: hubBox.bottom
+        };
+        target = {
+          x: cardBox.left + cardBox.width / 2,
+          y: cardBox.top
+        };
+        route = `M ${source.x} ${source.y} V ${target.y}`;
+      } else {
+        const isLeft = slot.endsWith("left");
+        const sourceHeight =
+          slot.startsWith("top") ? 0.32 : slot.startsWith("bottom") ? 0.68 : 0.5;
+        source = {
+          x: isLeft ? hubBox.left : hubBox.right,
+          y: hubBox.top + hubBox.height * sourceHeight
+        };
+        target = {
+          x: isLeft ? cardBox.right : cardBox.left,
+          y: cardBox.top + cardBox.height / 2
+        };
+        route = roundedTrack(source, target);
+      }
+
+      return { route, source, target };
     });
 
-    return svg;
+    routes.forEach(({ route }) => {
+      svg.appendChild(makeTrackElement(route, "framework-response-track-backdrop"));
+    });
+    routes.forEach(({ route }) => {
+      svg.appendChild(makeTrackElement(route, "framework-response-track"));
+    });
+
+    const terminalCoordinates = new Set();
+    routes.forEach(({ source, target }) => {
+      [source, target].forEach(point => {
+        const key = `${Math.round(point.x)}:${Math.round(point.y)}`;
+        if (terminalCoordinates.has(key)) return;
+        terminalCoordinates.add(key);
+
+        const terminal = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        terminal.classList.add("framework-response-terminal");
+        terminal.setAttribute("cx", point.x);
+        terminal.setAttribute("cy", point.y);
+        terminal.setAttribute("r", "6");
+        terminal.setAttribute("vector-effect", "non-scaling-stroke");
+        svg.appendChild(terminal);
+      });
+    });
+  };
+
+  const connectResponseMap = (map, svg, hub, cards) => {
+    responseResizeObserver?.disconnect();
+
+    let drawScheduled = false;
+    const scheduleDraw = () => {
+      if (drawScheduled) return;
+      drawScheduled = true;
+      window.requestAnimationFrame(() => {
+        drawScheduled = false;
+        drawResponseConnectors(map, svg, hub, cards);
+      });
+    };
+
+    scheduleDraw();
+    if ("ResizeObserver" in window) {
+      responseResizeObserver = new ResizeObserver(scheduleDraw);
+      [map, hub, ...cards].forEach(element => responseResizeObserver.observe(element));
+    }
   };
 
   const makeResponseCard = (record, label, index, slot) => {
@@ -464,34 +568,62 @@
       readEvidence(study.id, dimension).map(record => [record.label, record])
     );
 
+    responseResizeObserver?.disconnect();
+    responseResizeObserver = null;
     host.innerHTML = "";
     host.hidden = false;
 
     const map = document.createElement("section");
     map.className = "framework-response-map";
+    map.dataset.dimensionId = dimension.id;
     map.setAttribute("aria-label", `${dimension.label} responses for ${study.label}`);
     const slots = responseSlots[dimension.questions.length] || responseSlots[5];
-    map.appendChild(makeResponseConnectors(slots));
+    const connectors = makeResponseConnectors();
+    map.appendChild(connectors);
 
     const hub = document.createElement("header");
     hub.className = "framework-response-hub";
+
+    const mark = document.createElement("span");
+    mark.className = "framework-response-hub__mark";
+    mark.setAttribute("aria-hidden", "true");
+    const markIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    markIcon.setAttribute("viewBox", "0 0 100 100");
+    markIcon.setAttribute("focusable", "false");
+    const markPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    markPath.setAttribute(
+      "d",
+      "M18 42H38V31A11 11 0 1 1 60 31V42H82V61H71A11 11 0 1 0 71 83H48V72A11 11 0 1 0 26 72V42H18Z"
+    );
+    markPath.setAttribute("fill", "none");
+    markPath.setAttribute("stroke", "currentColor");
+    markPath.setAttribute("stroke-width", "6");
+    markPath.setAttribute("stroke-linecap", "round");
+    markPath.setAttribute("stroke-linejoin", "round");
+    markIcon.appendChild(markPath);
+    const markCode = document.createElement("span");
+    markCode.className = "framework-response-hub__code";
+    markCode.textContent = dimension.code;
+    mark.append(markIcon, markCode);
 
     const heading = document.createElement("h2");
     heading.textContent = dimension.label;
     const prompt = document.createElement("p");
     prompt.textContent = dimension.prompt;
-    hub.append(heading, prompt, makeStatus(coverage));
+    hub.append(mark, heading, prompt, makeStatus(coverage));
 
     const responses = document.createElement("div");
     responses.className = "framework-response-list";
+    const responseCards = [];
     dimension.questions.forEach((label, index) => {
-      responses.appendChild(
-        makeResponseCard(records.get(label), label, index, slots[index])
-      );
+      const card = makeResponseCard(records.get(label), label, index, slots[index]);
+      responseCards.push(card);
+      responses.appendChild(card);
     });
 
     map.append(hub, responses);
     host.appendChild(map);
+    connectResponseMap(map, connectors, hub, responseCards);
   };
 
   const renderOverview = study => {
@@ -558,6 +690,7 @@
           const selected = node === button;
           node.classList.toggle("is-selected", selected);
           node.setAttribute("aria-pressed", String(selected));
+          node.setAttribute("aria-expanded", String(selected));
         });
 
         renderDimensionDetail(detailHost, study, dimension);

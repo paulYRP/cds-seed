@@ -1,5 +1,5 @@
 <p align="left">
-  <a href="https://doi.org/10.1177/22150218261474554">
+  <a href="https://doi.org/10.1177/22150218261474554" target="_blank" rel="noopener noreferrer">
     <img src="https://img.shields.io/badge/SAGE-DOI%2010.1177%2F22150218261474554-b31b1b" alt="SAGE DOI: 10.1177/22150218261474554">
   </a>
 </p>

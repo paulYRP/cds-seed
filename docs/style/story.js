@@ -8,7 +8,7 @@
   const INTRO_TARGET_KEY = "cdsSeedIntroTarget";
   const STORY_SECTIONS = Object.freeze([
     { key: "home", href: "./" },
-    { key: "synthetic", href: "synthetic.html" },
+    { key: "synthetic", href: "./#synthetic" },
     { key: "real", href: "real.html" },
     { key: "summary", href: "summary.html" },
     { key: "report", href: "report.html" },
@@ -38,7 +38,10 @@
   }
 
   function initialiseStory() {
-    const pageKey = document.body.dataset.storyPage;
+    const documentPageKey = document.body.dataset.storyPage;
+    const pageKey = documentPageKey === "home" && window.location.hash === "#synthetic"
+      ? "synthetic"
+      : documentPageKey;
     const story = window.CDS_STORIES && window.CDS_STORIES[pageKey];
     const sectionIndex = STORY_SECTIONS.findIndex((section) => section.key === pageKey);
     const root = document.querySelector("[data-story-root]");
@@ -665,6 +668,10 @@
 
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(scheduleReplayLabelFit);
+    }
+
+    if (documentPageKey === "home") {
+      window.addEventListener("hashchange", () => window.location.reload());
     }
 
     const storyPreference = new URLSearchParams(window.location.search).get("story");

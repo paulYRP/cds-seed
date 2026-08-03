@@ -23,7 +23,7 @@ Each section begins with a concise visual introduction to its purpose and key fi
 
 ## Website sections
 
-- **[Synthetic](https://paulyrp.github.io/cds-seed/synthetic.html):** evidence and examples related to synthetic sport datasets.
+- **[Synthetic](https://paulyrp.github.io/cds-seed/#synthetic):** evidence and examples related to synthetic sport datasets.
 - **[Real](https://paulyrp.github.io/cds-seed/real.html):** an overview of real-world sport datasets and their characteristics.
 - **[Summary](https://paulyrp.github.io/cds-seed/summary.html):** a consolidated summary of the reviewed evidence.
 - **[Report](https://paulyrp.github.io/cds-seed/report.html):** the complete report and supporting analysis.

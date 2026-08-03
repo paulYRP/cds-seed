@@ -38,7 +38,7 @@
       label: "Hohl et al., 2024",
       href: "https://link.springer.com/chapter/10.1007/978-3-031-72353-7_12"
     },
-    syntheticPage: { label: "Synthetic evidence", href: "synthetic.html" },
+    syntheticPage: { label: "Synthetic evidence", href: "./#synthetic" },
     realPage: { label: "Real dataset evidence", href: "real.html" },
     dataPage: { label: "Supporting records", href: "data.html" },
     frameworkPage: { label: "Interactive framework", href: "framework.html" }
